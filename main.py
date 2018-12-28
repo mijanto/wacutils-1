@@ -41,17 +41,28 @@ async def on_message(message):
     if message.content.startswith('&hello'):
         msg = 'Hello {0.author.mention}'.format(message)
         await client.send_message(message.channel, msg)
-        return 
+        return
 
     if message.content.startswith('&status'):
         msg = 'Im fine, thank you. How are you? {0.author.mention}'.format(message)
         await client.send_message(message.channel, msg)
-        return 
+        return
 
     if message.content.startswith('&develop'):
         msg = 'This is our github page where you can help us developing the bot: https://github.com/wacutils/wacutils. We also  have a server, you can join us on: https://discord.gg/aGkx98q '.format(message)
         await client.send_message(message.channel, msg)
-        return 
+        return
+
+	if message.content.startswith('&wawetome'):
+        msg = ':wawe: {0.author.mention}'.format(message)
+        await client.send_message(message.channel, msg)
+        return
+
+    if message.content.startswith('&commands'):
+        msg = 'Here is what {0.author.mention} wanted:\n\n&hello\n&status\n&wawetome'.format(message)
+        await client.send_message(message.channel, msg)
+        return
+	
 
 @client.event
 async def on_ready():
