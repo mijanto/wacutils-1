@@ -53,8 +53,8 @@ async def on_message(message):
         await client.send_message(message.channel, msg)
         return
 
-	if message.content.startswith('&wawetome'):
-        msg = ':wawe: {0.author.mention}'.format(message)
+	if message.content.startswith('&wavetome'):
+        msg = ':wave: {0.author.mention}'.format(message)
         await client.send_message(message.channel, msg)
         return
 
