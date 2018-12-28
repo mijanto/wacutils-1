@@ -1,5 +1,5 @@
-
 import discord
+import socket
 import os
 
 client = discord.Client()
@@ -8,6 +8,16 @@ token = '<INSERT TOKEN HERE>'
 #operationToRuletable="and1xor6or7nor8nand14"
 operationToRuletable=[["and",1],["xor",6],["or",7],["nor",8],["nand",14]]
 
+def is_valid_ip_address(ip):
+	try:
+		socket.inet_aton(ip)
+		return True
+	except socket.error:
+		return False
+
+def ip_up(ip):
+	return os.system("ping -c 1 " + ip)==0
+	
 def operationBit(a,b,rule):
 	return bin(rule)[(2*a+b)]
 
@@ -41,27 +51,34 @@ async def on_message(message):
     if message.content.startswith('&hello'):
         msg = 'Hello {0.author.mention}'.format(message)
         await client.send_message(message.channel, msg)
-        return
 
-    if message.content.startswith('&status'):
+	elif message.content.startswith("%ping "):
+		argument = message.content.split(" ")[1]
+		
+		if not is_valid_ip_address(argument):
+			await client.send_message(message.channel, argument + " is not a valid IP address")
+			return
+		
+		if ip_up(argument):
+			await client.send_message(message.channel, "IP " + argument + " is up")
+		else:
+			await client.send_message(message.channel, "IP " + argument + " is down")
+
+    elif message.content.startswith('&status'):
         msg = 'Im fine, thank you. How are you? {0.author.mention}'.format(message)
         await client.send_message(message.channel, msg)
-        return
-
-    if message.content.startswith('&develop'):
+        
+    elif message.content.startswith('&develop'):
         msg = 'This is our github page where you can help us developing the bot: https://github.com/wacutils/wacutils. We also  have a server, you can join us on: https://discord.gg/aGkx98q '.format(message)
         await client.send_message(message.channel, msg)
-        return
 
-	if message.content.startswith('&wavetome'):
+	elif message.content.startswith('&wavetome'):
         msg = ':wave: {0.author.mention}'.format(message)
         await client.send_message(message.channel, msg)
-        return
 
-    if message.content.startswith('&commands'):
+    elif message.content.startswith('&commands'):
         msg = 'Here is what {0.author.mention} wanted:\n\n&hello\n&status\n&wawetome'.format(message)
         await client.send_message(message.channel, msg)
-        return
 	
 
 @client.event
