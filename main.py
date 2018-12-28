@@ -44,13 +44,13 @@ def operationWithMap(a,b,rule):
 
 @client.event
 async def on_message(message):
-    # we do not want the bot to reply to itself
-    if message.author == client.user:
-        return
+	# we do not want the bot to reply to itself
+	if message.author == client.user:
+		return
 
-    if message.content.startswith('&hello'):
-        msg = 'Hello {0.author.mention}'.format(message)
-        await client.send_message(message.channel, msg)
+	if message.content.startswith('&hello'):
+		msg = 'Hello {0.author.mention}'.format(message)
+		await client.send_message(message.channel, msg)
 
 	elif message.content.startswith("%ping "):
 		argument = message.content.split(" ")[1]
@@ -64,29 +64,29 @@ async def on_message(message):
 		else:
 			await client.send_message(message.channel, "IP " + argument + " is down")
 
-    elif message.content.startswith('&status'):
-        msg = 'Im fine, thank you. How are you? {0.author.mention}'.format(message)
-        await client.send_message(message.channel, msg)
+	elif message.content.startswith('&status'):
+		msg = 'Im fine, thank you. How are you? {0.author.mention}'.format(message)
+		await client.send_message(message.channel, msg)
         
-    elif message.content.startswith('&develop'):
-        msg = 'This is our github page where you can help us developing the bot: https://github.com/wacutils/wacutils. We also  have a server, you can join us on: https://discord.gg/aGkx98q '.format(message)
-        await client.send_message(message.channel, msg)
+	elif message.content.startswith('&develop'):
+		msg = 'This is our github page where you can help us developing the bot: https://github.com/wacutils/wacutils. We also  have a server, you can join us on: https://discord.gg/aGkx98q '.format(message)
+		await client.send_message(message.channel, msg)
 
 	elif message.content.startswith('&wavetome'):
-        msg = ':wave: {0.author.mention}'.format(message)
-        await client.send_message(message.channel, msg)
+		msg = ':wave: {0.author.mention}'.format(message)
+		await client.send_message(message.channel, msg)
 
-    elif message.content.startswith('&commands'):
-        msg = 'Here is what {0.author.mention} wanted:\n\n&hello\n&status\n&wawetome'.format(message)
-        await client.send_message(message.channel, msg)
+	elif message.content.startswith('&commands'):
+		msg = 'Here is what {0.author.mention} wanted:\n\n&hello\n&status\n&wawetome'.format(message)
+		await client.send_message(message.channel, msg)
 	
 
 @client.event
 async def on_ready():
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
-    print('------')
+	print('Logged in as')
+	print(client.user.name)
+	print(client.user.id)
+	print('------')
 
 client.run(token)
 
