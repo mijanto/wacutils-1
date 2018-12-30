@@ -11,6 +11,9 @@ prepend = "%"
 client = discord.Client()
 token = '<INSERT TOKEN HERE>'
 
+def binary(n):
+	return bin(n)[2:] # Slice off the "0b" part bin leaves behind
+
 def string_is_num(string):
 	for char in string:
 		if char not in "0123456789":
@@ -37,7 +40,7 @@ async def on_message(message):
 	content = message.content
 	# Ignore commands that are too long, these are likely not to be real commands
 	if len(content) > 50:
-		await client.send_message(message.channel, "Length of command exceeds max length of 50 (" + len(content) + ")")
+		await client.send_message(message.channel, "Length of command exceeds max length of 50 (" + str(len(content)) + ")")
 		return
 
 	args = content.split(' ')
