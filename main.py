@@ -6,10 +6,10 @@ import socket
 import sys # For getting python version
 import os
 
-prepend = "%"
+prepend = '%'
 
 client = discord.Client()
-token = '<INSERT TOKEN HERE>'
+token = "<INSERT TOKEN HERE>"
 
 def binary(n):
 	return bin(n)[2:] # Slice off the "0b" part bin leaves behind
@@ -50,7 +50,7 @@ async def on_message(message):
 
 	if content == prepend+"status":
 		verInfo = sys.version_info
-		versionStr = str(info[0])+"."+str(info[1])+"."+str(info[2]) # format: major.minor.micro
+		versionStr = str(verInfo[0])+"."+str(verInfo[1])+"."+str(verInfo[2]) # format: major.minor.micro
 		await client.send_message(message.channel, "Online, running on Python " + versionStr)
 
 	elif content == prepend+"help":
