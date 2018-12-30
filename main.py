@@ -38,6 +38,9 @@ async def on_message(message):
 		return
 
 	content = message.content
+	if content[0] is not prepend:
+		return
+
 	# Ignore commands that are too long, these are likely not to be real commands
 	if len(content) > 50:
 		await client.send_message(message.channel, "Length of command exceeds max length of 50 (" + str(len(content)) + ")")
@@ -56,7 +59,7 @@ async def on_message(message):
 
 	elif content.startswith(prepend+"ping "):
 		if not is_valid_ip(args[1]):
-			await client.send_message(message.channel, argument + " is not a valid IP address")
+			await client.send_message(message.channel, args[1] + " is not a valid IP address")
 			return
 
 		await client.send_message(message.channel, "IP " + args[1] + " is " + ("up" if ip_up(args[1]) else "down"))
@@ -65,7 +68,7 @@ async def on_message(message):
 		if not string_is_num(args[1]):
 			await client.send_message(message.channel, "Usage: " + prepend + "binary [number]")
 			return
-		await client.send_message(message.channel, "Binary value of " + args[1] + " is " + binary(int(argument)))
+		await client.send_message(message.channel, "Binary value of " + args[1] + " is " + binary(int(args[1])))
 
 
 @client.event
